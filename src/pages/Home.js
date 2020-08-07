@@ -7,17 +7,24 @@ import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
+  link: {
+    textDecoration: 'none',
+  },
   button: {
-    height: '200px',
-    width: '200px',
+    height: '25vh',
+    width: '25vh',
+    minHeight: '4em',
+    minWidth: '4em',
     margin: '8px',
     borderRadius: '50%',
+    fontSize: '2em',
+    color: 'white',
   },
   signInButton: {
     background: 'green',
   },
   signOutButton: {
-    background: 'red',
+    background: 'darkred',
   },
 }));
 
@@ -25,13 +32,13 @@ const Home = () => {
   const classes = useStyles();
   return (
     <>
-      <Link to="/signin">
+      <Link className={classes.link} to="/signin">
         <Button className={clsx(classes.button, classes.signInButton)}>
           Sign In
         </Button>
       </Link>
 
-      <Link to="/signout">
+      <Link className={classes.link} to="/signout">
         <Button className={clsx(classes.button, classes.signOutButton)}>
           Sign Out
         </Button>

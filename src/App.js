@@ -10,21 +10,21 @@ import SignOut from './pages/SignOut';
 const useStyles = makeStyles(theme => ({
   app: {
     textAlign: 'center',
-    backgroundColor: '#282c34',
     minHeight: '100vh',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
     color: 'white',
+    maxHeight: '100vh',
   },
   appHeader: {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    fontSize: 'calc(10px + 2vmin)',
-    marginBottom: '32px',
+    fontSize: 'calc(40px + 2vmin)',
+    marginTop: '10vh',
+    marginBottom: '10vh',
     width: '100vw',
-    height: '20vh',
   },
 }));
 
