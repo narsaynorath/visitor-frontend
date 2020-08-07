@@ -18,6 +18,7 @@ const useStyles = makeStyles(theme => ({
     justifyContent: 'center',
     width: '70vw',
     height: 'fit-content',
+    minHeight: '100vh',
   },
 }));
 
