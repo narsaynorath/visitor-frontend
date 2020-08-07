@@ -12,12 +12,11 @@ import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 const useStyles = makeStyles(theme => ({
   app: {
     textAlign: 'center',
-    minHeight: '100vh',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
     color: 'white',
-    maxHeight: '100vh',
+    marginBottom: '2em',
   },
   appHeader: {
     display: 'flex',
@@ -27,6 +26,10 @@ const useStyles = makeStyles(theme => ({
     marginTop: '10vh',
     marginBottom: '10vh',
     width: '100vw',
+  },
+  content: {
+    width: '80%',
+    maxWidth: '600px',
   },
 }));
 
@@ -40,7 +43,7 @@ const App = () => {
           Welcome to Security Compass
         </header>
 
-        <content>
+        <content className={classes.content}>
           <Switch>
             <Route exact path="/signin">
               <SignIn />

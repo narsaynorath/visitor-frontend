@@ -6,10 +6,13 @@ import Loader from 'react-loader-spinner';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Autocomplete from '@material-ui/lab/Autocomplete';
+import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Paper from '@material-ui/core/Paper';
 
-import chaperones from '../mockChaperones';
+import { useFormInput } from '../utils/form';
+
+import chaperoneOptions from '../mockChaperones';
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -18,7 +21,9 @@ const useStyles = makeStyles(theme => ({
   form: {
     display: 'flex',
     flexDirection: 'column',
-    marginBottom: '2em',
+  },
+  formFooter: {
+    marginTop: '2em',
   },
   input: {
     marginBottom: '16px',
@@ -28,11 +33,21 @@ const useStyles = makeStyles(theme => ({
 const SignIn = () => {
   const classes = useStyles();
   const [loading, setLoading] = useState(true);
+  const firstName = useFormInput('');
+  const lastName = useFormInput('');
+  const [chaperones, setChaperones] = useState([]);
 
   useEffect(() => {
     // Mock API request to get list data
     setTimeout(() => setLoading(false), 500);
   }, []);
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    console.log(firstName);
+    console.log(lastName);
+    console.log(chaperones);
+  };
 
   if (loading) {
     return <Loader type="TailSpin" color="#00BFFF" height={80} width={80} />;
@@ -41,19 +56,38 @@ const SignIn = () => {
   return (
     <>
       <Paper className={classes.paper}>
-        <form className={classes.form}>
-          <TextField className={classes.input} label="First Name" />
-          <TextField className={classes.input} label="Last Name" />
+        <form className={classes.form} onSubmit={handleSubmit}>
+          <TextField
+            className={classes.input}
+            label="First Name"
+            autoFocus
+            required
+            {...firstName}
+          />
+          <TextField
+            className={classes.input}
+            label="Last Name"
+            required
+            {...lastName}
+          />
           <Autocomplete
             className={classes.input}
-            options={chaperones}
+            multiple
+            options={chaperoneOptions}
             getOptionLabel={option => option.name}
             renderInput={params => (
               <TextField {...params} label="Chaperone" variant="outlined" />
             )}
+            onChange={(e, val) => setChaperones(val)}
+            required
           />
+          <Button type="submit" color="primary" variant="contained">
+            Submit
+          </Button>
         </form>
-        <Link to="/">Back</Link>
+        <footer className={classes.formFooter}>
+          <Link to="/">Back</Link>
+        </footer>
       </Paper>
     </>
   );
