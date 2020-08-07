@@ -15,8 +15,16 @@ import { useFormInput } from '../utils/form';
 import chaperoneOptions from '../mockChaperones';
 
 const useStyles = makeStyles(theme => ({
+  container: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '70vw',
+  },
   paper: {
-    padding: '1em',
+    width: '75%',
+    padding: '2vh',
   },
   form: {
     display: 'flex',
@@ -24,9 +32,24 @@ const useStyles = makeStyles(theme => ({
   },
   formFooter: {
     marginTop: '2em',
+    textAlign: 'right',
   },
   input: {
     marginBottom: '16px',
+  },
+  header: {
+    marginBottom: '10vh',
+  },
+  greeting: {
+    color: '#f15f24',
+    fontSize: '10vh',
+    fontWeight: 'normal',
+    marginBottom: 0,
+  },
+  subtitle: {
+    color: 'grey',
+    fontSize: '3vh',
+    fontWeight: 'normal',
   },
 }));
 
@@ -49,48 +72,63 @@ const SignIn = () => {
     console.log(chaperones);
   };
 
+  let content;
   if (loading) {
-    return <Loader type="TailSpin" color="#00BFFF" height={80} width={80} />;
+    content = <Loader type="TailSpin" color="#00BFFF" height={80} width={80} />;
+  } else {
+    content = (
+      <>
+        <Paper className={classes.paper} elevation={0}>
+          <header className={classes.header}>
+            <h1 className={classes.greeting}>Hello there!</h1>
+            <h2 className={classes.subtitle}>Let's get you signed in.</h2>
+          </header>
+          <form className={classes.form} onSubmit={handleSubmit}>
+            <TextField
+              className={classes.input}
+              label="First Name"
+              autoFocus
+              required
+              variant="outlined"
+              {...firstName}
+            />
+            <TextField
+              className={classes.input}
+              label="Last Name"
+              required
+              variant="outlined"
+              {...lastName}
+            />
+            <Autocomplete
+              className={classes.input}
+              multiple
+              options={chaperoneOptions}
+              getOptionLabel={option => option.name}
+              renderInput={params => (
+                <TextField
+                  {...params}
+                  label="Who you are here to see"
+                  variant="outlined"
+                />
+              )}
+              onChange={(e, val) => setChaperones(val)}
+              required
+            />
+            <footer className={classes.formFooter}>
+              <Link to="/">
+                <Button color="primary">Cancel</Button>
+              </Link>
+              <Button type="submit" color="primary" variant="contained">
+                Next
+              </Button>
+            </footer>
+          </form>
+        </Paper>
+      </>
+    );
   }
 
-  return (
-    <>
-      <Paper className={classes.paper}>
-        <form className={classes.form} onSubmit={handleSubmit}>
-          <TextField
-            className={classes.input}
-            label="First Name"
-            autoFocus
-            required
-            {...firstName}
-          />
-          <TextField
-            className={classes.input}
-            label="Last Name"
-            required
-            {...lastName}
-          />
-          <Autocomplete
-            className={classes.input}
-            multiple
-            options={chaperoneOptions}
-            getOptionLabel={option => option.name}
-            renderInput={params => (
-              <TextField {...params} label="Chaperone" variant="outlined" />
-            )}
-            onChange={(e, val) => setChaperones(val)}
-            required
-          />
-          <Button type="submit" color="primary" variant="contained">
-            Submit
-          </Button>
-        </form>
-        <footer className={classes.formFooter}>
-          <Link to="/">Back</Link>
-        </footer>
-      </Paper>
-    </>
-  );
+  return <div className={classes.container}>{content}</div>;
 };
 
 export default SignIn;
