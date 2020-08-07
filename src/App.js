@@ -7,6 +7,8 @@ import Home from './pages/Home';
 import SignIn from './pages/SignIn';
 import SignOut from './pages/SignOut';
 
+import background from './assets/background.png';
+
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 
 const useStyles = makeStyles(theme => ({
@@ -16,20 +18,9 @@ const useStyles = makeStyles(theme => ({
     flexDirection: 'column',
     alignItems: 'center',
     color: 'white',
-    marginBottom: '2em',
-  },
-  appHeader: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    fontSize: 'calc(40px + 2vmin)',
-    marginTop: '10vh',
-    marginBottom: '10vh',
-    width: '100vw',
-  },
-  content: {
-    width: '80%',
-    maxWidth: '600px',
+    backgroundImage: `url(${background})`,
+    backgroundSize: 'cover',
+    height: '100%',
   },
 }));
 
@@ -39,23 +30,17 @@ const App = () => {
   return (
     <Router>
       <div className={classes.app}>
-        <header className={classes.appHeader}>
-          Welcome to Security Compass
-        </header>
-
-        <content className={classes.content}>
-          <Switch>
-            <Route exact path="/signin">
-              <SignIn />
-            </Route>
-            <Route exact path="/signout">
-              <SignOut />
-            </Route>
-            <Route exact path="/">
-              <Home />
-            </Route>
-          </Switch>
-        </content>
+        <Switch>
+          <Route exact path="/signin">
+            <SignIn />
+          </Route>
+          <Route exact path="/signout">
+            <SignOut />
+          </Route>
+          <Route exact path="/">
+            <Home />
+          </Route>
+        </Switch>
       </div>
     </Router>
   );

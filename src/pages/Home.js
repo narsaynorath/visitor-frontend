@@ -1,30 +1,45 @@
 import React from 'react';
-import clsx from 'clsx';
 
 import { Link } from 'react-router-dom';
 
 import Button from '@material-ui/core/Button';
+import MeetingRoomIcon from '@material-ui/icons/MeetingRoom';
 import { makeStyles } from '@material-ui/core/styles';
 
+import logo from '../assets/securitycompass-logo-light.png';
+
 const useStyles = makeStyles(theme => ({
+  header: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontSize: 'calc(40px + 2vmin)',
+    marginTop: '30vh',
+    marginBottom: '5vh',
+    width: '100vw',
+  },
+  logo: {
+    height: '15vh',
+  },
   link: {
     textDecoration: 'none',
   },
-  button: {
-    height: '25vh',
-    width: '25vh',
-    minHeight: '4em',
-    minWidth: '4em',
-    margin: '8px',
-    borderRadius: '50%',
-    fontSize: '2em',
-    color: 'white',
-  },
   signInButton: {
-    background: 'green',
+    background: '#f15f24',
+    fontSize: '3vh',
+    padding: '2vh 5vh',
+    textTransform: 'capitalize',
+    color: 'white',
+    fontWeight: 'bold',
   },
   signOutButton: {
-    background: 'darkred',
+    position: 'fixed',
+    left: '16px',
+    bottom: '8px',
+    color: 'white',
+    fontWeight: 'bold',
+    textTransform: 'capitalize',
   },
 }));
 
@@ -32,19 +47,21 @@ const Home = () => {
   const classes = useStyles();
   return (
     <>
+      <header className={classes.header}>
+        <div>Welcome to</div>
+        <img className={classes.logo} src={logo} alt="Security Compass" />
+      </header>
       <Link className={classes.link} to="/signin">
-        <Button
-          className={clsx(classes.button, classes.signInButton)}
-          disableRipple
-        >
+        <Button className={classes.signInButton} disableRipple>
           Sign In
         </Button>
       </Link>
 
       <Link className={classes.link} to="/signout">
         <Button
-          className={clsx(classes.button, classes.signOutButton)}
+          className={classes.signOutButton}
           disableRipple
+          startIcon={<MeetingRoomIcon />}
         >
           Sign Out
         </Button>
