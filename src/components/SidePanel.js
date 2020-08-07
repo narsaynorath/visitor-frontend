@@ -18,7 +18,7 @@ const useStyles = makeStyles(theme => ({
     position: 'fixed',
     top: '20px',
     left: '20px',
-    height: '5vh',
+    width: '20vh',
   },
   header: {
     marginTop: '15vh',
