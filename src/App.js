@@ -65,13 +65,13 @@ const App = () => {
           <Home />
         </Route>
         <Route path="/signin">
-          <div style={{ display: 'flex', width: '100vw' }}>
+          <div style={{ display: 'flex', marginLeft: '30vw', width: '70vw' }}>
             <SidePanel />
             <SignIn />
           </div>
         </Route>
         <Route path="/signout">
-          <div style={{ display: 'flex', width: '100vw' }}>
+          <div style={{ display: 'flex', marginLeft: '30vw', width: '70vw' }}>
             <SidePanel />
             <SignOut />
           </div>

@@ -6,6 +6,7 @@ import logo from '../assets/securitycompass-logo-light.png';
 
 const useStyles = makeStyles(theme => ({
   sidePanel: {
+    position: 'fixed',
     display: 'inline-block',
     left: 0,
     top: 0,
