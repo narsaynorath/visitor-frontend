@@ -7,6 +7,8 @@ import Home from './pages/Home';
 import SignIn from './pages/SignIn';
 import SignOut from './pages/SignOut';
 
+import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
+
 const useStyles = makeStyles(theme => ({
   app: {
     textAlign: 'center',

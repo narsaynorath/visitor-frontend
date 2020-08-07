@@ -33,13 +33,19 @@ const Home = () => {
   return (
     <>
       <Link className={classes.link} to="/signin">
-        <Button className={clsx(classes.button, classes.signInButton)}>
+        <Button
+          className={clsx(classes.button, classes.signInButton)}
+          disableRipple
+        >
           Sign In
         </Button>
       </Link>
 
       <Link className={classes.link} to="/signout">
-        <Button className={clsx(classes.button, classes.signOutButton)}>
+        <Button
+          className={clsx(classes.button, classes.signOutButton)}
+          disableRipple
+        >
           Sign Out
         </Button>
       </Link>
