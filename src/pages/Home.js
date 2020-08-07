@@ -51,13 +51,13 @@ const Home = () => {
         <div>Welcome to</div>
         <img className={classes.logo} src={logo} alt="Security Compass" />
       </header>
-      <Link className={classes.link} to="/signin">
+      <Link className={classes.link} to="/signin/">
         <Button className={classes.signInButton} disableRipple>
           Sign In
         </Button>
       </Link>
 
-      <Link className={classes.link} to="/signout">
+      <Link className={classes.link} to="/signout/">
         <Button
           className={classes.signOutButton}
           disableRipple

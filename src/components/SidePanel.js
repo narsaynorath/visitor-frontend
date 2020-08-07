@@ -32,7 +32,7 @@ const SidePanel = () => {
 
   return (
     <div className={classes.sidePanel}>
-      <img className={classes.logo} src={logo} />
+      <img className={classes.logo} src={logo} alt="Security Compass" />
       <h1 className={classes.header}>Sign In</h1>
       <ol className={classes.actionList}>
         <li>Visitor Information</li>

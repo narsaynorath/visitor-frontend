@@ -61,20 +61,20 @@ const App = () => {
         })}
       />
       <Switch>
-        <Route exact path="/signin">
+        <Route exact path="/">
+          <Home />
+        </Route>
+        <Route path="/signin">
           <div style={{ display: 'flex', width: '100vw' }}>
             <SidePanel />
             <SignIn />
           </div>
         </Route>
-        <Route exact path="/signout">
+        <Route path="/signout">
           <div style={{ display: 'flex', width: '100vw' }}>
             <SidePanel />
             <SignOut />
           </div>
-        </Route>
-        <Route exact path="/">
-          <Home />
         </Route>
       </Switch>
     </div>
