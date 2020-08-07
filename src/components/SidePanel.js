@@ -29,9 +29,10 @@ const useStyles = makeStyles(theme => ({
 
 const SidePanel = () => {
   const classes = useStyles();
+
   return (
     <div className={classes.sidePanel}>
-      <img className={classes.logo} src={logo} alt="Security Compass" />
+      <img className={classes.logo} src={logo} />
       <h1 className={classes.header}>Sign In</h1>
       <ol className={classes.actionList}>
         <li>Visitor Information</li>
