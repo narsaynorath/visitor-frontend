@@ -17,6 +17,7 @@ const useStyles = makeStyles(theme => ({
     alignItems: 'center',
     justifyContent: 'center',
     width: '70vw',
+    height: 'fit-content',
   },
 }));
 
