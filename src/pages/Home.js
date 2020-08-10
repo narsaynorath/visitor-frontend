@@ -26,12 +26,16 @@ const useStyles = makeStyles(theme => ({
     textDecoration: 'none',
   },
   signInButton: {
-    background: '#f15f24',
+    background: theme.palette.button.highlight,
     fontSize: '3vh',
     padding: '2vh 5vh',
     textTransform: 'capitalize',
     color: 'white',
     fontWeight: 'bold',
+    border: '5px solid transparent',
+    '&:hover': {
+      border: `5px solid ${theme.palette.button.highlight}`,
+    },
   },
   signOutButton: {
     position: 'fixed',
@@ -51,6 +55,7 @@ const Home = () => {
         <div>Welcome to</div>
         <img className={classes.logo} src={logo} alt="Security Compass" />
       </header>
+
       <Link className={classes.link} to="/signin/">
         <Button className={classes.signInButton} disableRipple>
           Sign In

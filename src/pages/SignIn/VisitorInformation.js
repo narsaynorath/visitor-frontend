@@ -32,13 +32,13 @@ const useStyles = makeStyles(theme => ({
     marginBottom: '10vh',
   },
   greeting: {
-    color: '#f15f24',
+    color: theme.palette.text.header,
     fontSize: '10vh',
     fontWeight: 'normal',
     marginBottom: 0,
   },
   subtitle: {
-    color: 'grey',
+    color: theme.palette.text.subtitle,
     fontSize: '3vh',
     fontWeight: 'normal',
   },

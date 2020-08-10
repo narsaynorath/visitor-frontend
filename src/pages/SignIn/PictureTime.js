@@ -55,7 +55,7 @@ const PictureTime = ({ history }) => {
           variant="contained"
           onClick={() => history.push('/signin/picture/capture')}
         >
-          Next
+          Take my picture
         </Button>
       </footer>
     </Paper>
