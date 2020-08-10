@@ -1,7 +1,7 @@
 import React from 'react';
 import clsx from 'clsx';
 
-import { Switch, Route, useLocation } from 'react-router-dom';
+import { Switch, Redirect, Route, useLocation } from 'react-router-dom';
 
 import { makeStyles, ThemeProvider } from '@material-ui/core/styles';
 
@@ -79,6 +79,7 @@ const App = () => {
               <SignOut />
             </div>
           </Route>
+          <Redirect to="/" />
         </Switch>
       </div>
     </ThemeProvider>

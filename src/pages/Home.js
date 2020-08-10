@@ -34,7 +34,7 @@ const useStyles = makeStyles(theme => ({
     fontWeight: 'bold',
     border: '5px solid transparent',
     '&:hover': {
-      border: `5px solid ${theme.palette.button.highlight}`,
+      border: `5px solid white`,
     },
   },
   signOutButton: {
