@@ -26,16 +26,16 @@ const useStyles = makeStyles(theme => ({
     textDecoration: 'none',
   },
   signInButton: {
-    background: theme.palette.button.highlight,
     fontSize: '3vh',
     padding: '2vh 5vh',
     textTransform: 'capitalize',
-    color: 'white',
     fontWeight: 'bold',
     border: '5px solid transparent',
     '&:hover': {
       border: `5px solid white`,
     },
+    background: theme.palette.secondary.main,
+    color: theme.palette.secondary.contrastText,
   },
   signOutButton: {
     position: 'fixed',
