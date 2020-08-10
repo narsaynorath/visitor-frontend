@@ -3,7 +3,7 @@ import clsx from 'clsx';
 
 import { Switch, Redirect, Route, useLocation } from 'react-router-dom';
 
-import { makeStyles, ThemeProvider } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 
 import Home from './pages/Home';
 import SignIn from './pages/SignIn';
@@ -12,8 +12,6 @@ import SignOut from './pages/SignOut';
 import SidePanel from './components/SidePanel';
 
 import background from './assets/background.png';
-
-import { scTheme } from './theme';
 
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 
@@ -56,33 +54,31 @@ const App = () => {
 
   console.log(location);
   return (
-    <ThemeProvider theme={scTheme}>
-      <div className={classes.app}>
-        <div
-          className={clsx(classes.background, {
-            [classes.backgroundCropped]: location.pathname !== '/',
-          })}
-        />
-        <Switch>
-          <Route exact path="/">
-            <Home />
-          </Route>
-          <Route path="/signin">
-            <div style={{ display: 'flex', marginLeft: '30vw', width: '70vw' }}>
-              <SidePanel />
-              <SignIn />
-            </div>
-          </Route>
-          <Route path="/signout">
-            <div style={{ display: 'flex', marginLeft: '30vw', width: '70vw' }}>
-              <SidePanel />
-              <SignOut />
-            </div>
-          </Route>
-          <Redirect to="/" />
-        </Switch>
-      </div>
-    </ThemeProvider>
+    <div className={classes.app}>
+      <div
+        className={clsx(classes.background, {
+          [classes.backgroundCropped]: location.pathname !== '/',
+        })}
+      />
+      <Switch>
+        <Route exact path="/">
+          <Home />
+        </Route>
+        <Route path="/signin">
+          <div style={{ display: 'flex', marginLeft: '30vw', width: '70vw' }}>
+            <SidePanel />
+            <SignIn />
+          </div>
+        </Route>
+        <Route path="/signout">
+          <div style={{ display: 'flex', marginLeft: '30vw', width: '70vw' }}>
+            <SidePanel />
+            <SignOut />
+          </div>
+        </Route>
+        <Redirect to="/" />
+      </Switch>
+    </div>
   );
 };
 

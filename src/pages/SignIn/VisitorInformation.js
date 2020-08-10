@@ -1,14 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-import { Link, withRouter } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+
+import { Formik, Form, Field } from 'formik';
+import { TextField } from 'formik-material-ui';
+import { Autocomplete } from 'formik-material-ui-lab';
 
 import { makeStyles } from '@material-ui/core/styles';
-import Autocomplete from '@material-ui/lab/Autocomplete';
 import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
+import MuiTextField from '@material-ui/core/TextField';
 import Paper from '@material-ui/core/Paper';
-
-import { useFormInput } from '../../utils/form';
 
 import chaperoneOptions from './mockChaperones';
 
@@ -44,17 +45,12 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const VisitorInformation = ({ history }) => {
+const VisitorInformation = () => {
   const classes = useStyles();
-  const firstName = useFormInput('');
-  const lastName = useFormInput('');
-  const [chaperones, setChaperones] = useState([]);
+  const history = useHistory();
 
-  const handleSubmit = e => {
-    e.preventDefault();
-    console.log(firstName);
-    console.log(lastName);
-    console.log(chaperones);
+  const handleSubmit = values => {
+    console.log(values);
     history.push('/signin/picture/');
   };
 
@@ -65,49 +61,70 @@ const VisitorInformation = ({ history }) => {
           <h1 className={classes.greeting}>Hello there!</h1>
           <h2 className={classes.subtitle}>Let's get you signed in.</h2>
         </header>
-        <form className={classes.form} onSubmit={handleSubmit}>
-          <TextField
-            className={classes.input}
-            label="First Name"
-            autoFocus
-            required
-            variant="outlined"
-            {...firstName}
-          />
-          <TextField
-            className={classes.input}
-            label="Last Name"
-            required
-            variant="outlined"
-            {...lastName}
-          />
-          <Autocomplete
-            className={classes.input}
-            multiple
-            options={chaperoneOptions}
-            getOptionLabel={option => option.name}
-            renderInput={params => (
-              <TextField
-                {...params}
-                label="Who you are here to see"
+
+        <Formik enableReinitialize initialValues={{}} onSubmit={handleSubmit}>
+          {({ isSubmitting, values }) => (
+            <Form className={classes.form}>
+              <Field
+                component={TextField}
+                className={classes.input}
+                name="email"
+                type="email"
+                label="Email"
                 variant="outlined"
+                required
               />
-            )}
-            onChange={(e, val) => setChaperones(val)}
-            required
-          />
-          <footer className={classes.formFooter}>
-            <Link to="/">
-              <Button color="primary">Cancel</Button>
-            </Link>
-            <Button type="submit" color="primary" variant="contained">
-              Next
-            </Button>
-          </footer>
-        </form>
+              <Field
+                component={TextField}
+                className={classes.input}
+                name="firstName"
+                label="First Name"
+                variant="outlined"
+                required
+              />
+              <Field
+                component={TextField}
+                className={classes.input}
+                name="lastName"
+                label="Last Name"
+                variant="outlined"
+                required
+              />
+              <Field
+                component={Autocomplete}
+                name="Chaperone"
+                multiple
+                options={chaperoneOptions}
+                getOptionLabel={option => option.name}
+                renderInput={params => (
+                  <MuiTextField
+                    {...params}
+                    label="Who you are here to see"
+                    variant="outlined"
+                    required={!values.Chaperone}
+                    className={classes.input}
+                  />
+                )}
+              />
+              <footer className={classes.formFooter}>
+                <Link to="/">
+                  <Button color="primary">Cancel</Button>
+                </Link>
+                <Button
+                  disabled={isSubmitting}
+                  type="submit"
+                  color="primary"
+                  variant="contained"
+                >
+                  Next
+                </Button>
+              </footer>
+            </Form>
+          )}
+        </Formik>
       </Paper>
     </>
   );
 };
 
-export default withRouter(VisitorInformation);
+export default VisitorInformation;
