@@ -1,9 +1,6 @@
 import React from 'react';
 
-import { Link, withRouter } from 'react-router-dom';
-
 import { makeStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 
 const useStyles = makeStyles(theme => ({
@@ -31,7 +28,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const PictureTime = ({ history }) => {
+const PictureTime = () => {
   const classes = useStyles();
 
   return (
@@ -46,20 +43,8 @@ const PictureTime = ({ history }) => {
         </h2>
         <h2 className={classes.subtitle}>Ready?</h2>
       </header>
-      <footer className={classes.footer}>
-        <Link to="/signin/">
-          <Button color="primary">Back</Button>
-        </Link>
-        <Button
-          color="primary"
-          variant="contained"
-          onClick={() => history.push('/signin/picture/capture')}
-        >
-          Take my picture
-        </Button>
-      </footer>
     </Paper>
   );
 };
 
-export default withRouter(PictureTime);
+export default PictureTime;

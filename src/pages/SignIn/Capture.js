@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import Camera from 'react-html5-camera-photo';
 
@@ -20,34 +20,33 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const Capture = () => {
-  const [dataUri, setDataUri] = useState(null);
+const Capture = ({ form: { setFieldValue, values } }) => {
   const classes = useStyles();
 
   const handleTakePhoto = dataUri => {
     console.log(dataUri);
-    setDataUri(dataUri);
+    setFieldValue('picture', dataUri);
+    document.getElementById('temp').value = 'temp';
   };
 
   const clearPhoto = () => {
-    setDataUri(null);
+    setFieldValue('picture', '');
+    document.getElementById('temp').value = '';
   };
 
   return (
     <div
       className={classes.container}
       style={{
-        background: !dataUri ? 'black' : 'white',
+        background: !values.picture ? 'black' : 'white',
       }}
     >
-      {dataUri ? (
+      <input id="temp" style={{ visibility: 'hidden' }} required></input>
+      {values.picture ? (
         <>
-          <ImagePreview dataUri={dataUri} />
+          <ImagePreview dataUri={values.picture} />
           <footer>
             <Button onClick={clearPhoto}>Retake</Button>
-            <Button color="primary" variant="contained">
-              Next
-            </Button>
           </footer>
         </>
       ) : (
