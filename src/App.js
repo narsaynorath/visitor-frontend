@@ -9,10 +9,9 @@ import Home from './pages/Home';
 import SignIn from './pages/SignIn';
 import SignOut from './pages/SignOut';
 
+import Adam from './components/Adam';
 import SidePanel from './components/SidePanel';
 
-import adamSmile from './assets/adam-smile.png';
-import adamWave from './assets/adam-wave.png';
 import background from './assets/background.png';
 
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
@@ -49,22 +48,11 @@ const useStyles = makeStyles(theme => ({
   main: {
     display: 'flex',
   },
-  adamContainer: {
-    maxWidth: '30vw',
-  },
-  adam: {
-    width: '40vw',
-    position: 'fixed',
-    bottom: '-85px',
-    transform: 'translate(-50%, 6%)',
-  },
 }));
 
 const App = () => {
   const classes = useStyles();
   const location = useLocation();
-
-  let adamImg = location.pathname === '/signin/' ? adamWave : adamSmile;
 
   console.log(location);
   return (
@@ -74,9 +62,7 @@ const App = () => {
           [classes.backgroundCropped]: location.pathname !== '/',
         })}
       >
-        <div className={classes.adamContainer}>
-          <img className={classes.adam} src={adamImg} alt="" />
-        </div>
+        <Adam />
       </div>
       <Switch>
         <Route exact path="/">
