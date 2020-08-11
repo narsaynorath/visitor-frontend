@@ -20,6 +20,11 @@ const theme = createMuiTheme({
       subtitle: 'rgba(0, 0, 0, 0.6)',
     },
   },
+  typography: {
+    button: {
+      textTransform: 'capitalize',
+    },
+  },
   overrides: {
     MuiFormLabel: {
       asterisk: {
