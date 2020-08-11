@@ -49,16 +49,6 @@ const VisitorInformation = ({ form: { values } }) => {
       <Field
         component={TextField}
         className={classes.input}
-        name="email"
-        type="email"
-        label="Email"
-        variant="outlined"
-        fullWidth
-        required
-      />
-      <Field
-        component={TextField}
-        className={classes.input}
         name="firstName"
         label="First Name"
         variant="outlined"
@@ -70,6 +60,16 @@ const VisitorInformation = ({ form: { values } }) => {
         className={classes.input}
         name="lastName"
         label="Last Name"
+        variant="outlined"
+        fullWidth
+        required
+      />
+      <Field
+        component={TextField}
+        className={classes.input}
+        name="email"
+        type="email"
+        label="Email"
         variant="outlined"
         fullWidth
         required
