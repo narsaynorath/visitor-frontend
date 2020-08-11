@@ -49,11 +49,14 @@ const useStyles = makeStyles(theme => ({
   main: {
     display: 'flex',
   },
+  adamContainer: {
+    maxWidth: '30vw',
+  },
   adam: {
     width: '40vw',
     position: 'fixed',
-    left: '-70px',
     bottom: '-85px',
+    transform: 'translate(-50%, 6%)',
   },
 }));
 
@@ -71,7 +74,9 @@ const App = () => {
           [classes.backgroundCropped]: location.pathname !== '/',
         })}
       >
-        <img className={classes.adam} src={adamImg} alt="" />
+        <div className={classes.adamContainer}>
+          <img className={classes.adam} src={adamImg} alt="" />
+        </div>
       </div>
       <Switch>
         <Route exact path="/">
