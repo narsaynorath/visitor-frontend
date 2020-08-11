@@ -14,7 +14,6 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
-    height: '100vh',
     maxWidth: '70vw',
     overflow: 'hidden',
   },
