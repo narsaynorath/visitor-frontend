@@ -3,7 +3,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import Button from '@material-ui/core/Button';
-import MeetingRoomIcon from '@material-ui/icons/MeetingRoom';
+// import MeetingRoomIcon from '@material-ui/icons/MeetingRoom';
 import { makeStyles } from '@material-ui/core/styles';
 
 import logo from '../assets/securitycompass-logo-light.png';
@@ -62,15 +62,15 @@ const Home = () => {
         </Button>
       </Link>
 
-      <Link className={classes.link} to="/signout/">
-        <Button
-          className={classes.signOutButton}
-          disableRipple
-          startIcon={<MeetingRoomIcon />}
-        >
-          Sign Out
-        </Button>
-      </Link>
+      {/* <Link className={classes.link} to="/signout/"> */}
+      {/*   <Button */}
+      {/*     className={classes.signOutButton} */}
+      {/*     disableRipple */}
+      {/*     startIcon={<MeetingRoomIcon />} */}
+      {/*   > */}
+      {/*     Sign Out */}
+      {/*   </Button> */}
+      {/* </Link> */}
     </>
   );
 };
