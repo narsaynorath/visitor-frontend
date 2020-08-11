@@ -25,16 +25,25 @@ const useStyles = makeStyles(theme => ({
   },
   header: {
     marginTop: '15vh',
+    color: 'white',
   },
   actionList: {
     textAlign: 'left',
   },
   stepper: {
     backgroundColor: 'transparent',
-    height: '200px',
+    height: '20vh',
   },
   stepperLine: {
     visibility: 'hidden',
+  },
+  label: {
+    color: 'white !important',
+    fontSize: 'larger',
+  },
+  stepIcon: {
+    height: '32px',
+    width: '32px',
   },
 }));
 
@@ -59,7 +68,12 @@ const SidePanel = ({ activeStep }) => {
       >
         {steps.map(label => (
           <Step key={label}>
-            <StepLabel>{label}</StepLabel>
+            <StepLabel
+              classes={{ label: classes.label }}
+              StepIconProps={{ classes: { root: classes.stepIcon } }}
+            >
+              {label}
+            </StepLabel>
           </Step>
         ))}
       </Stepper>
