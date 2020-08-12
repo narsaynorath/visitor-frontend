@@ -20,6 +20,11 @@ const theme = createMuiTheme({
       subtitle: 'rgba(0, 0, 0, 0.6)',
     },
   },
+  typography: {
+    button: {
+      textTransform: 'capitalize',
+    },
+  },
   overrides: {
     MuiFormLabel: {
       asterisk: {
@@ -30,13 +35,27 @@ const theme = createMuiTheme({
       },
     },
     MuiStepIcon: {
+      text: {
+        fill: '#12294D',
+        fontWeight: 'bold',
+      },
       root: {
+        height: '32px',
+        width: '32px',
+        color: 'white',
         '&$completed': {
           color: '#FFB300',
         },
         '&$active': {
           color: '#CF4A14',
         },
+      },
+    },
+    MuiStepLabel: {
+      label: {
+        fontSize: 'larger',
+        // Always keep sidebar label text white
+        color: 'white !important',
       },
     },
   },

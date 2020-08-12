@@ -1,17 +1,8 @@
 import React from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
 
 const useStyles = makeStyles(theme => ({
-  paper: {
-    width: '75%',
-    padding: '2vh',
-  },
-  footer: {
-    marginTop: '2em',
-    textAlign: 'right',
-  },
   header: {
     marginBottom: '10vh',
   },
@@ -32,18 +23,14 @@ const PictureTime = () => {
   const classes = useStyles();
 
   return (
-    <Paper className={classes.paper} elevation={0}>
-      <header className={classes.header}>
-        <h1 className={classes.greeting}>Picture Time!</h1>
-        <h2 className={classes.subtitle}>
-          Let's take a picture for your visitor pass.
-        </h2>
-        <h2 className={classes.subtitle}>
-          The camera is on the lefthand side.
-        </h2>
-        <h2 className={classes.subtitle}>Ready?</h2>
-      </header>
-    </Paper>
+    <header className={classes.header}>
+      <h1 className={classes.greeting}>Picture Time!</h1>
+      <h2 className={classes.subtitle}>
+        Let's take a picture for your visitor pass.
+      </h2>
+      <h2 className={classes.subtitle}>The camera is on the lefthand side.</h2>
+      <h2 className={classes.subtitle}>Ready?</h2>
+    </header>
   );
 };
 

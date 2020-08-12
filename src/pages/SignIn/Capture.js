@@ -8,13 +8,13 @@ import Button from '@material-ui/core/Button';
 import ImagePreview from './ImagePreview';
 
 import 'react-html5-camera-photo/build/css/index.css';
+import './capture.css';
 
 const useStyles = makeStyles(theme => ({
   container: {
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
-    height: '100vh',
     maxWidth: '70vw',
     overflow: 'hidden',
   },
@@ -35,12 +35,7 @@ const Capture = ({ form: { setFieldValue, values } }) => {
   };
 
   return (
-    <div
-      className={classes.container}
-      style={{
-        background: !values.picture ? 'black' : 'white',
-      }}
-    >
+    <div className={classes.container}>
       <input id="temp" style={{ visibility: 'hidden' }} required></input>
       {values.picture ? (
         <>

@@ -25,13 +25,13 @@ const useStyles = makeStyles(theme => ({
   },
   header: {
     marginTop: '15vh',
-  },
-  actionList: {
+    color: 'white',
     textAlign: 'left',
+    paddingLeft: '25px',
+    fontWeight: 'normal',
   },
   stepper: {
     backgroundColor: 'transparent',
-    height: '200px',
   },
   stepperLine: {
     visibility: 'hidden',

@@ -28,7 +28,6 @@ const useStyles = makeStyles(theme => ({
   signInButton: {
     fontSize: '3vh',
     padding: '2vh 5vh',
-    textTransform: 'capitalize',
     fontWeight: 'bold',
     border: '5px solid transparent',
     '&:hover': {
@@ -38,12 +37,11 @@ const useStyles = makeStyles(theme => ({
     color: theme.palette.secondary.contrastText,
   },
   signOutButton: {
-    position: 'fixed',
-    left: '16px',
+    position: 'absolute',
+    transform: 'translateX(-50%)',
     bottom: '8px',
     color: 'white',
     fontWeight: 'bold',
-    textTransform: 'capitalize',
   },
 }));
 

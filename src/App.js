@@ -9,6 +9,7 @@ import Home from './pages/Home';
 import SignIn from './pages/SignIn';
 import SignOut from './pages/SignOut';
 
+import Adam from './components/Adam';
 import SidePanel from './components/SidePanel';
 
 import background from './assets/background.png';
@@ -39,6 +40,7 @@ const useStyles = makeStyles(theme => ({
   },
   backgroundCropped: {
     width: '30vw',
+    background: theme.palette.primary.main,
     transition: theme.transitions.create(['width'], {
       duration: theme.transitions.duration.complex,
     }),
@@ -59,7 +61,9 @@ const App = () => {
         className={clsx(classes.background, {
           [classes.backgroundCropped]: location.pathname !== '/',
         })}
-      />
+      >
+        <Adam />
+      </div>
       <Switch>
         <Route exact path="/">
           <Home />
