@@ -1,6 +1,9 @@
 import React from 'react';
-
 import { makeStyles } from '@material-ui/core/styles';
+import Stepper from '@material-ui/core/Stepper';
+import StepConnector from '@material-ui/core/StepConnector';
+import Step from '@material-ui/core/Step';
+import StepLabel from '@material-ui/core/StepLabel';
 
 import logo from '../assets/securitycompass-logo-light.png';
 
@@ -26,20 +29,40 @@ const useStyles = makeStyles(theme => ({
   actionList: {
     textAlign: 'left',
   },
+  stepper: {
+    backgroundColor: 'transparent',
+    height: '200px',
+  },
+  stepperLine: {
+    visibility: 'hidden',
+  },
 }));
 
-const SidePanel = () => {
+const SidePanel = ({ activeStep }) => {
   const classes = useStyles();
+  const steps = [
+    'Visitor Information',
+    'Picture Time',
+    'Capture',
+    'Visitor Pass',
+  ];
 
   return (
     <div className={classes.sidePanel}>
       <img className={classes.logo} src={logo} alt="Security Compass" />
       <h1 className={classes.header}>Sign In</h1>
-      <ol className={classes.actionList}>
-        <li>Visitor Information</li>
-        <li>Picture Time</li>
-        <li>Visitor Pass</li>
-      </ol>
+      <Stepper
+        connector={<StepConnector className={classes.stepperLine} />}
+        className={classes.stepper}
+        activeStep={activeStep}
+        orientation="vertical"
+      >
+        {steps.map(label => (
+          <Step key={label}>
+            <StepLabel>{label}</StepLabel>
+          </Step>
+        ))}
+      </Stepper>
     </div>
   );
 };

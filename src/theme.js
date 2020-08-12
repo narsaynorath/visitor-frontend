@@ -29,6 +29,16 @@ const theme = createMuiTheme({
         },
       },
     },
+    MuiStepIcon: {
+      root: {
+        '&$completed': {
+          color: '#FFB300',
+        },
+        '&$active': {
+          color: '#CF4A14',
+        },
+      },
+    },
   },
 });
 
