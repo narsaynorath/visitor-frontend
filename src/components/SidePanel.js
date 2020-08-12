@@ -38,19 +38,13 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const SidePanel = ({ activeStep }) => {
+const SidePanel = ({ header, steps, activeStep }) => {
   const classes = useStyles();
-  const steps = [
-    'Visitor Information',
-    'Picture Time',
-    'Capture',
-    'Visitor Pass',
-  ];
 
   return (
     <div className={classes.sidePanel}>
       <img className={classes.logo} src={logo} alt="Security Compass" />
-      <h1 className={classes.header}>Sign In</h1>
+      <h1 className={classes.header}>{header}</h1>
       <Stepper
         connector={<StepConnector className={classes.stepperLine} />}
         className={classes.stepper}

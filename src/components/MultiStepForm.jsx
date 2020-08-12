@@ -17,7 +17,13 @@ const useStyles = makeStyles({
 
 const MultiStepFormStep = ({ children }) => children;
 
-const MultiStepForm = ({ children, initialValues, onSubmit }) => {
+const MultiStepForm = ({
+  children,
+  initialValues,
+  onSubmit,
+  stepLabels,
+  sidePanelHeader,
+}) => {
   const classes = useStyles();
   const [stepNumber, setStepNumber] = useState(0);
   const steps = React.Children.toArray(children);
@@ -48,7 +54,11 @@ const MultiStepForm = ({ children, initialValues, onSubmit }) => {
 
   return (
     <>
-      <SidePanel activeStep={stepNumber} />
+      <SidePanel
+        header={sidePanelHeader}
+        steps={stepLabels}
+        activeStep={stepNumber}
+      />
       <Formik
         enableReinitialize
         initialValues={snapshot}
