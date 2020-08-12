@@ -2,7 +2,16 @@ import APIService from './apiService';
 
 class SignInService extends APIService {
   checkInVisitor(visitorInfo) {
-    this.put('/visitor', visitorInfo);
+    return this.put('/visitor', visitorInfo);
+  }
+
+  getChaperones(apiToken) {
+    const options = {
+      headers: {
+        Authorization: apiToken,
+      },
+    };
+    return this.get('/directory', options);
   }
 }
 

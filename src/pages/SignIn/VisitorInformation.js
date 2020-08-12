@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { Field } from 'formik';
 import { TextField } from 'formik-material-ui';
@@ -6,8 +6,10 @@ import { Autocomplete } from 'formik-material-ui-lab';
 
 import { makeStyles } from '@material-ui/core/styles';
 import MuiTextField from '@material-ui/core/TextField';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
-import chaperoneOptions from './mockChaperones';
+import getCognitoUserSession from '../../services/awsAuthService';
+import signInService from '../../services/signInService';
 
 const useStyles = makeStyles(theme => ({
   form: {
@@ -39,6 +41,20 @@ const useStyles = makeStyles(theme => ({
 
 const VisitorInformation = ({ form: { values } }) => {
   const classes = useStyles();
+  const [chaperones, setChaperones] = useState([]);
+  const loading = chaperones.length === 0;
+
+  useEffect(() => {
+    async function _useEffect() {
+      const cognitoUserSession = await getCognitoUserSession();
+      const apiToken = cognitoUserSession.accessToken.jwtToken;
+      const chaperones = await signInService.getChaperones(apiToken);
+      if (chaperones.successful) {
+        setChaperones(chaperones.data);
+      }
+    }
+    _useEffect();
+  }, []);
 
   return (
     <>
@@ -81,8 +97,10 @@ const VisitorInformation = ({ form: { values } }) => {
         component={Autocomplete}
         name="Chaperone"
         multiple
-        options={chaperoneOptions}
-        getOptionLabel={option => option.name}
+        filterSelectedOptions
+        options={chaperones}
+        loading={loading}
+        getOptionLabel={option => option.real_name}
         renderInput={params => (
           <MuiTextField
             {...params}
@@ -91,6 +109,17 @@ const VisitorInformation = ({ form: { values } }) => {
             className={classes.input}
             required={!values.Chaperone}
             fullWidth
+            InputProps={{
+              ...params.InputProps,
+              endAdornment: (
+                <>
+                  {loading ? (
+                    <CircularProgress color="inherit" size={20} />
+                  ) : null}
+                  {params.InputProps.endAdornment}
+                </>
+              ),
+            }}
           />
         )}
       />
