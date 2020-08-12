@@ -51,7 +51,10 @@ const SignIn = ({ token }) => {
         token.access_token
       );
       if (response.successful) {
-        history.push('/');
+        history.push({
+          pathname: '/success',
+          state: { chaperone: values.Chaperone },
+        });
       }
     }
     _handleSubmit();

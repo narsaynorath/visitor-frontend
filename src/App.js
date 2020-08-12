@@ -7,6 +7,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import Home from './pages/Home';
 import SignIn from './pages/SignIn';
+import SignInSuccess from './pages/SignInSuccess';
 import SignOut from './pages/SignOut';
 
 import Adam from './components/Adam';
@@ -103,6 +104,11 @@ const App = () => {
         <Route path="/signin">
           <div style={{ display: 'flex', marginLeft: '30vw', width: '70vw' }}>
             <SignIn token={token} />
+          </div>
+        </Route>
+        <Route path="/success">
+          <div style={{ display: 'flex', marginLeft: '30vw', width: '70vw' }}>
+            <SignInSuccess />
           </div>
         </Route>
         <Route path="/signout">
