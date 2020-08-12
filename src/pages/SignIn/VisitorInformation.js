@@ -52,6 +52,7 @@ const VisitorInformation = ({ form: { values } }) => {
         name="firstName"
         label="First Name"
         variant="outlined"
+        autoComplete="off"
         fullWidth
         required
       />
@@ -61,6 +62,7 @@ const VisitorInformation = ({ form: { values } }) => {
         name="lastName"
         label="Last Name"
         variant="outlined"
+        autoComplete="off"
         fullWidth
         required
       />
@@ -71,6 +73,7 @@ const VisitorInformation = ({ form: { values } }) => {
         type="email"
         label="Email"
         variant="outlined"
+        autoComplete="off"
         fullWidth
         required
       />
