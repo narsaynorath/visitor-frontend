@@ -36,12 +36,21 @@ const theme = createMuiTheme({
     },
     MuiStepIcon: {
       root: {
+        height: '32px',
+        width: '32px',
         '&$completed': {
           color: '#FFB300',
         },
         '&$active': {
           color: '#CF4A14',
         },
+      },
+    },
+    MuiStepLabel: {
+      label: {
+        fontSize: 'larger',
+        // Always keep sidebar label text white
+        color: 'white !important',
       },
     },
   },
