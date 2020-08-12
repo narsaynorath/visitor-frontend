@@ -6,9 +6,9 @@ import Loader from 'react-loader-spinner';
 
 import { makeStyles } from '@material-ui/core/styles';
 
-import VisitorInformation from './VisitorInformation';
-
+import Capture from './Capture';
 import PictureTime from './PictureTime';
+import VisitorInformation from './VisitorInformation';
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -45,7 +45,7 @@ const SignIn = () => {
           <PictureTime />
         </Route>
         <Route exact path={`${path}/picture/capture`}>
-          <div style={{ background: 'yellow', color: 'black' }}>SAY CHEEEZ</div>
+          <Capture />
         </Route>
         <Route exact path={`${path}/pass`}>
           <div>Pass Time</div>
