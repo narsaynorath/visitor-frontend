@@ -35,9 +35,14 @@ const theme = createMuiTheme({
       },
     },
     MuiStepIcon: {
+      text: {
+        fill: '#12294D',
+        fontWeight: 'bold',
+      },
       root: {
         height: '32px',
         width: '32px',
+        color: 'white',
         '&$completed': {
           color: '#FFB300',
         },

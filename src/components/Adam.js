@@ -11,10 +11,11 @@ const useStyles = makeStyles(theme => ({
     maxWidth: '30vw',
   },
   adam: {
-    width: '40vw',
+    maxHeight: '60vh',
+    maxWidth: '40vw',
     position: 'fixed',
-    bottom: '-85px',
-    transform: 'translate(-50%, 6%)',
+    transform: 'translate(-50%)',
+    bottom: '-15vh',
   },
 }));
 

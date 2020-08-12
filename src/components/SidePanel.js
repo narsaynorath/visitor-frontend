@@ -29,7 +29,6 @@ const useStyles = makeStyles(theme => ({
   },
   stepper: {
     backgroundColor: 'transparent',
-    height: '20vh',
   },
   stepperLine: {
     visibility: 'hidden',
