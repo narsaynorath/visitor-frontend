@@ -21,7 +21,6 @@ const useStyles = makeStyles(theme => ({
   paper: {
     width: 'fit-content',
   },
-  header: {},
   greeting: {
     color: theme.palette.text.header,
     fontSize: '10vh',
@@ -50,7 +49,7 @@ const Success = ({ steps }) => {
     <div className={classes.container}>
       <SidePanel header="SignIn" steps={steps} activeStep={steps.length} />
       <Paper className={classes.paper} elevation={0}>
-        <header className={classes.header}>
+        <header>
           <h1 className={classes.greeting}>You're Signed In!</h1>
           <h2 className={classes.subtitle} style={{ marginBottom: 0 }}>
             We have notified <strong>{names}</strong> that you're here.
