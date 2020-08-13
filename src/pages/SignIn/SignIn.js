@@ -1,19 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import Loader from 'react-loader-spinner';
-import { useHistory } from 'react-router-dom';
+import { Switch, Route, useHistory, useRouteMatch } from 'react-router-dom';
 
 import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
 
+import { Field } from 'formik';
+
 import Capture from './Capture';
 import PictureTime from './PictureTime';
-import { Field } from 'formik';
+import Success from './Success';
+import VisitorInformation from './VisitorInformation';
 
 import {
   MultiStepForm,
   MultiStepFormStep,
 } from '../../components/MultiStepForm';
-import VisitorInformation from './VisitorInformation';
 
 import signInService from '../../services/signInService';
 
@@ -37,11 +39,14 @@ const SignIn = ({ token }) => {
   const classes = useStyles();
   const history = useHistory();
   const [loading, setLoading] = useState(true);
+  const { path } = useRouteMatch();
 
   useEffect(() => {
     // Mock API request to get list data
     setTimeout(() => setLoading(false), 500);
   }, []);
+
+  const steps = ['Visitor Information', 'Picture Time', 'Capture'];
 
   const handleSubmit = values => {
     console.log(values);
@@ -52,7 +57,7 @@ const SignIn = ({ token }) => {
       );
       if (response.successful) {
         history.push({
-          pathname: '/success',
+          pathname: '/signin/success',
           state: { chaperone: values.Chaperone },
         });
       }
@@ -71,12 +76,7 @@ const SignIn = ({ token }) => {
           initialValues={{}}
           onSubmit={handleSubmit}
           sidePanelHeader="Sign In"
-          stepLabels={[
-            'Visitor Information',
-            'Picture Time',
-            'Capture',
-            'Visitor Pass',
-          ]}
+          stepLabels={steps}
         >
           <MultiStepFormStep>
             <Field component={VisitorInformation} token={token} />
@@ -91,7 +91,19 @@ const SignIn = ({ token }) => {
       </Paper>
     );
   }
-  return <div className={classes.container}>{content}</div>;
+
+  return (
+    <div className={classes.container}>
+      <Switch>
+        <Route exact path={path}>
+          {content}
+        </Route>
+        <Route path={`${path}/success`}>
+          <Success steps={steps} />
+        </Route>
+      </Switch>
+    </div>
+  );
 };
 
 export default SignIn;

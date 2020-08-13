@@ -1,11 +1,12 @@
 import React from 'react';
 
-import { useLocation } from 'react-router-dom';
+import { useLocation, useHistory } from 'react-router-dom';
 
 import { makeStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 
-import SidePanel from '../components/SidePanel';
+import SidePanel from '../../components/SidePanel';
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -33,26 +34,21 @@ const useStyles = makeStyles(theme => ({
     fontWeight: 'normal',
     textAlign: 'left',
   },
+  footer: {
+    textAlign: 'right',
+  },
 }));
 
-const SignInSuccess = () => {
+const Success = ({ steps }) => {
   const classes = useStyles();
   const location = useLocation();
+  const history = useHistory();
 
   const names = location.state.chaperone.map(c => c.name).join(', ');
 
   return (
     <div className={classes.container}>
-      <SidePanel
-        header="SignIn"
-        steps={[
-          'Visitor Information',
-          'Picture Time',
-          'Capture',
-          'Visitor Pass',
-        ]}
-        activeStep={4}
-      />
+      <SidePanel header="SignIn" steps={steps} activeStep={steps.length} />
       <Paper className={classes.paper} elevation={0}>
         <header className={classes.header}>
           <h1 className={classes.greeting}>You're Signed In!</h1>
@@ -64,9 +60,18 @@ const SignInSuccess = () => {
           </h2>
           <h2 className={classes.subtitle}>Have a great day!</h2>
         </header>
+        <footer className={classes.footer}>
+          <Button
+            onClick={() => history.push('/')}
+            color="primary"
+            variant="contained"
+          >
+            Done
+          </Button>
+        </footer>
       </Paper>
     </div>
   );
 };
 
-export default SignInSuccess;
+export default Success;
