@@ -39,15 +39,14 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const VisitorInformation = ({ form: { values } }) => {
+const VisitorInformation = ({ form: { values }, token }) => {
   const classes = useStyles();
   const [chaperones, setChaperones] = useState([]);
   const loading = chaperones.length === 0;
 
   useEffect(() => {
     async function _useEffect() {
-      const apiToken = await getAPIToken();
-      const chaperones = await signInService.getChaperones(apiToken);
+      const chaperones = await signInService.getChaperones(token);
       if (chaperones.successful) {
         setChaperones(chaperones.data);
       }

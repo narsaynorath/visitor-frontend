@@ -6,6 +6,10 @@ const baseURL =
   process.env.REACT_APP_API_URL ||
   'https://cyj3eowb72.execute-api.us-east-2.amazonaws.com';
 
+const authURL =
+  process.env.REACT_APP_AUTH_URL ||
+  'https://visitors.auth.us-east-2.amazoncognito.com';
+
 function successfulAPIRequest(result) {
   return {
     data: result.data,
@@ -21,21 +25,26 @@ function unsuccessfulAPIRequest(result) {
 }
 
 export default class APIService {
+  buildURL(url, base) {
+    const baseToUse = base ? authURL : baseURL;
+    return `${baseToUse}${url}`;
+  }
+
   put(url, options) {
     return axios
-      .put(`${baseURL}${url}`, options)
+      .put(this.buildURL(url), options)
       .then(successfulAPIRequest, unsuccessfulAPIRequest);
   }
 
   get(url, options) {
     return axios
-      .get(`${baseURL}${url}`, options)
+      .get(this.buildURL(url), options)
       .then(successfulAPIRequest, unsuccessfulAPIRequest);
   }
 
-  post(url, body, options) {
+  post(url, body, options, base) {
     return axios
-      .post(`${baseURL}${url}`, body, options)
+      .post(this.buildURL(url, base), body, options)
       .then(successfulAPIRequest, unsuccessfulAPIRequest);
   }
 }

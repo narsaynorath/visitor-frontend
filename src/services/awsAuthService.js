@@ -1,41 +1,24 @@
-import {
-  AuthenticationDetails,
-  CognitoUserPool,
-  CognitoUser,
-} from 'amazon-cognito-identity-js';
+import APIService from './apiService';
 
-var authenticationData = {
-  Username: process.env.REACT_APP_API_USER || '',
-  Password: process.env.REACT_APP_API_PASS || '',
-};
+class TokenService extends APIService {
+  getTokens(code) {
+    const params = new URLSearchParams();
+    params.append('grant_type', 'authorization_code');
+    params.append('client_id', '2nk1shldaugv5agice7ham165j');
+    params.append(
+      'redirect_uri',
+      process.env.REACT_APP_URL || 'http://localhost:3000'
+    );
+    params.append('code', code);
 
-var authenticationDetails = new AuthenticationDetails(authenticationData);
+    const options = {
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+    };
 
-var poolData = {
-  UserPoolId: process.env.REACT_APP_USR_POOL_ID || 'us-east-2_yWRkOEFLL', // Your user pool id here
-  ClientId: process.env.REACT_APP_CLIENT_ID || '2nk1shldaugv5agice7ham165j', // Your client id here
-};
-
-var userPool = new CognitoUserPool(poolData);
-var userData = {
-  Username: process.env.REACT_APP_API_USER || '',
-  Pool: userPool,
-};
-
-var cognitoUser = new CognitoUser(userData);
-
-function asyncAuthenticateUser() {
-  console.log(process.env);
-  return new Promise(function (resolve, reject) {
-    cognitoUser.authenticateUser(authenticationDetails, {
-      onSuccess: resolve,
-      onFailure: reject,
-    });
-  });
+    return this.post('/oauth2/token', params, options, 'auth');
+  }
 }
 
-export default async function getAPIToken() {
-  const cognitoUserSession = await asyncAuthenticateUser();
-  const apiToken = cognitoUserSession.accessToken.jwtToken;
-  return apiToken;
-}
+export default new TokenService();

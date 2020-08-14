@@ -34,7 +34,7 @@ const useStyles = makeStyles({
   },
 });
 
-const SignIn = () => {
+const SignIn = ({ token }) => {
   const classes = useStyles();
   const history = useHistory();
   const [loading, setLoading] = useState(true);
@@ -47,8 +47,7 @@ const SignIn = () => {
   const handleSubmit = values => {
     console.log(values);
     async function _handleSubmit() {
-      const apiToken = await getAPIToken();
-      const response = await signInService.checkInVisitor(values, apiToken);
+      const response = await signInService.checkInVisitor(values, token);
       if (response.successful) {
         history.push('/');
       }
@@ -65,7 +64,7 @@ const SignIn = () => {
       <Paper className={classes.paper} elevation={0}>
         <MultiStepForm initialValues={{}} onSubmit={handleSubmit}>
           <MultiStepFormStep>
-            <Field component={VisitorInformation} />
+            <Field component={VisitorInformation} token={token} />
           </MultiStepFormStep>
           <MultiStepFormStep>
             <Field component={PictureTime} />

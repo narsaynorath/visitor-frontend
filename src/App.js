@@ -22,6 +22,8 @@ import background from './assets/background.png';
 
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 
+import awsService from './services/awsAuthService';
+
 const useStyles = makeStyles(theme => ({
   app: {
     textAlign: 'center',
@@ -61,27 +63,39 @@ function getCode() {
   return urlParams.get('code');
 }
 
+const redirectURL = `https://visitors.auth.us-east-2.amazoncognito.com/login?client_id=2nk1shldaugv5agice7ham165j&response_type=code&scope=email+openid&redirect_uri=${
+  process.env.NODE_ENV === 'development'
+    ? 'http://localhost:3000'
+    : process.env.REACT_APP_URL
+}`;
+
 const App = () => {
   const classes = useStyles();
   const location = useLocation();
   const history = useHistory();
 
-  const [code, setCode] = useState('');
   const [token, setToken] = useState('');
 
   useEffect(() => {
     // grab code/token step
-    const blah = getCode();
-    if (!blah) {
-      window.location.href =
-        'https://visitors.auth.us-east-2.amazoncognito.com/login?client_id=2nk1shldaugv5agice7ham165j&response_type=token&scope=email+openid&redirect_uri=http://localhost:3000';
+    const code = getCode();
+    if (!code) {
+      window.location.href = redirectURL;
     }
 
-    setCode(blah);
+    async function asyncUseEffect() {
+      const response = await awsService.getTokens(code);
+      console.log(response);
+      if (response.successful) {
+        setToken(response.data.access_token);
+      } else {
+        window.location.href = redirectURL;
+      }
+    }
+    asyncUseEffect();
   }, []);
 
-  console.log(code);
-  return code ? (
+  return token ? (
     <div className={classes.app}>
       <div
         className={clsx(classes.background, {
@@ -96,7 +110,7 @@ const App = () => {
         </Route>
         <Route path="/signin">
           <div style={{ display: 'flex', marginLeft: '30vw', width: '70vw' }}>
-            <SignIn />
+            <SignIn token={token} />
           </div>
         </Route>
         <Route path="/signout">
