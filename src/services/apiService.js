@@ -3,7 +3,7 @@ import axios from 'axios';
 // Where do we store the BASE URL, environement variable, here in a variable.. etc
 
 const baseURL =
-  process.env.API_URL ||
+  process.env.REACT_APP_API_URL ||
   'https://cyj3eowb72.execute-api.us-east-2.amazonaws.com';
 
 function successfulAPIRequest(result) {
@@ -30,6 +30,12 @@ export default class APIService {
   get(url, options) {
     return axios
       .get(`${baseURL}${url}`, options)
+      .then(successfulAPIRequest, unsuccessfulAPIRequest);
+  }
+
+  post(url, body, options) {
+    return axios
+      .post(`${baseURL}${url}`, body, options)
       .then(successfulAPIRequest, unsuccessfulAPIRequest);
   }
 }

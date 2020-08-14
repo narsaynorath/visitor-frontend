@@ -15,6 +15,9 @@ import {
 } from '../../components/MultiStepForm';
 import VisitorInformation from './VisitorInformation';
 
+import getAPIToken from '../../services/awsAuthService';
+import signInService from '../../services/signInService';
+
 const useStyles = makeStyles({
   container: {
     display: 'flex',
@@ -43,7 +46,15 @@ const SignIn = () => {
 
   const handleSubmit = values => {
     console.log(values);
-    history.push('/');
+    async function _handleSubmit() {
+      const apiToken = await getAPIToken();
+      const response = await signInService.checkInVisitor(values, apiToken);
+      if (response.successful) {
+        history.push('/');
+      }
+    }
+    _handleSubmit();
+    setLoading(true);
   };
 
   let content = (

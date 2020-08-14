@@ -8,7 +8,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import MuiTextField from '@material-ui/core/TextField';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
-import getCognitoUserSession from '../../services/awsAuthService';
+import getAPIToken from '../../services/awsAuthService';
 import signInService from '../../services/signInService';
 
 const useStyles = makeStyles(theme => ({
@@ -46,8 +46,7 @@ const VisitorInformation = ({ form: { values } }) => {
 
   useEffect(() => {
     async function _useEffect() {
-      const cognitoUserSession = await getCognitoUserSession();
-      const apiToken = cognitoUserSession.accessToken.jwtToken;
+      const apiToken = await getAPIToken();
       const chaperones = await signInService.getChaperones(apiToken);
       if (chaperones.successful) {
         setChaperones(chaperones.data);
@@ -65,7 +64,7 @@ const VisitorInformation = ({ form: { values } }) => {
       <Field
         component={TextField}
         className={classes.input}
-        name="firstName"
+        name="first_name"
         label="First Name"
         variant="outlined"
         autoComplete="off"
@@ -75,7 +74,7 @@ const VisitorInformation = ({ form: { values } }) => {
       <Field
         component={TextField}
         className={classes.input}
-        name="lastName"
+        name="last_name"
         label="Last Name"
         variant="outlined"
         autoComplete="off"
@@ -95,7 +94,7 @@ const VisitorInformation = ({ form: { values } }) => {
       />
       <Field
         component={Autocomplete}
-        name="Chaperone"
+        name="chaperones"
         multiple
         filterSelectedOptions
         options={chaperones}
@@ -107,7 +106,7 @@ const VisitorInformation = ({ form: { values } }) => {
             label="Who you are here to see"
             variant="outlined"
             className={classes.input}
-            required={!values.Chaperone}
+            required={!values.chaperones}
             fullWidth
             InputProps={{
               ...params.InputProps,
