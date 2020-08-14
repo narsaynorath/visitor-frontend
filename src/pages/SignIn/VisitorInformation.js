@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { Field } from 'formik';
 import { TextField } from 'formik-material-ui';
@@ -6,8 +6,10 @@ import { Autocomplete } from 'formik-material-ui-lab';
 
 import { makeStyles } from '@material-ui/core/styles';
 import MuiTextField from '@material-ui/core/TextField';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
-import chaperoneOptions from './mockChaperones';
+import getAPIToken from '../../services/awsAuthService';
+import signInService from '../../services/signInService';
 
 const useStyles = makeStyles(theme => ({
   form: {
@@ -37,8 +39,20 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const VisitorInformation = ({ form: { values } }) => {
+const VisitorInformation = ({ form: { values }, token }) => {
   const classes = useStyles();
+  const [chaperones, setChaperones] = useState([]);
+  const loading = chaperones.length === 0;
+
+  useEffect(() => {
+    async function _useEffect() {
+      const chaperones = await signInService.getChaperones(token.access_token);
+      if (chaperones.successful) {
+        setChaperones(chaperones.data);
+      }
+    }
+    _useEffect();
+  }, []);
 
   return (
     <>
@@ -49,7 +63,7 @@ const VisitorInformation = ({ form: { values } }) => {
       <Field
         component={TextField}
         className={classes.input}
-        name="firstName"
+        name="first_name"
         label="First Name"
         variant="outlined"
         autoComplete="off"
@@ -59,7 +73,7 @@ const VisitorInformation = ({ form: { values } }) => {
       <Field
         component={TextField}
         className={classes.input}
-        name="lastName"
+        name="last_name"
         label="Last Name"
         variant="outlined"
         autoComplete="off"
@@ -79,18 +93,31 @@ const VisitorInformation = ({ form: { values } }) => {
       />
       <Field
         component={Autocomplete}
-        name="Chaperone"
+        name="chaperones"
         multiple
-        options={chaperoneOptions}
-        getOptionLabel={option => option.name}
+        filterSelectedOptions
+        options={chaperones}
+        loading={loading}
+        getOptionLabel={option => option.real_name}
         renderInput={params => (
           <MuiTextField
             {...params}
             label="Who you are here to see"
             variant="outlined"
             className={classes.input}
-            required={!values.Chaperone}
+            required={!values.chaperones}
             fullWidth
+            InputProps={{
+              ...params.InputProps,
+              endAdornment: (
+                <>
+                  {loading ? (
+                    <CircularProgress color="inherit" size={20} />
+                  ) : null}
+                  {params.InputProps.endAdornment}
+                </>
+              ),
+            }}
           />
         )}
       />

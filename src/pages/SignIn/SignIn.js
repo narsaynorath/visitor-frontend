@@ -15,6 +15,9 @@ import {
 } from '../../components/MultiStepForm';
 import VisitorInformation from './VisitorInformation';
 
+import getAPIToken from '../../services/awsAuthService';
+import signInService from '../../services/signInService';
+
 const useStyles = makeStyles({
   container: {
     display: 'flex',
@@ -31,7 +34,7 @@ const useStyles = makeStyles({
   },
 });
 
-const SignIn = () => {
+const SignIn = ({ token }) => {
   const classes = useStyles();
   const history = useHistory();
   const [loading, setLoading] = useState(true);
@@ -43,7 +46,17 @@ const SignIn = () => {
 
   const handleSubmit = values => {
     console.log(values);
-    history.push('/');
+    async function _handleSubmit() {
+      const response = await signInService.checkInVisitor(
+        values,
+        token.access_token
+      );
+      if (response.successful) {
+        history.push('/');
+      }
+    }
+    _handleSubmit();
+    setLoading(true);
   };
 
   let content = (
@@ -54,7 +67,7 @@ const SignIn = () => {
       <Paper className={classes.paper} elevation={0}>
         <MultiStepForm initialValues={{}} onSubmit={handleSubmit}>
           <MultiStepFormStep>
-            <Field component={VisitorInformation} />
+            <Field component={VisitorInformation} token={token} />
           </MultiStepFormStep>
           <MultiStepFormStep>
             <Field component={PictureTime} />
