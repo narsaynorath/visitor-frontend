@@ -1,7 +1,13 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import clsx from 'clsx';
 
-import { Switch, Redirect, Route, useLocation } from 'react-router-dom';
+import {
+  Switch,
+  Redirect,
+  Route,
+  useHistory,
+  useLocation,
+} from 'react-router-dom';
 
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -50,12 +56,36 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
+function getParam(param) {
+  const urlParams = new URLSearchParams(window.location.search.slice(1));
+  console.log(window.location);
+  console.log(window.location.search);
+  console.log('ughhhh', urlParams);
+  console.log(param);
+  return urlParams.get(param);
+}
+
 const App = () => {
   const classes = useStyles();
   const location = useLocation();
+  const history = useHistory();
 
-  console.log(location);
-  return (
+  const [code, setCode] = useState('');
+  const [token, setToken] = useState('');
+
+  useEffect(() => {
+    // grab code/token step
+    const blah = getParam('access_token');
+    if (!blah) {
+      window.location.href =
+        'https://visitors.auth.us-east-2.amazoncognito.com/login?client_id=2nk1shldaugv5agice7ham165j&response_type=code&scope=email+openid&redirect_uri=http://localhost:3000';
+    }
+
+    setToken(blah);
+  }, []);
+
+  console.log(token);
+  return token ? (
     <div className={classes.app}>
       <div
         className={clsx(classes.background, {
@@ -82,7 +112,7 @@ const App = () => {
         <Redirect to="/" />
       </Switch>
     </div>
-  );
+  ) : null;
 };
 
 export default App;
