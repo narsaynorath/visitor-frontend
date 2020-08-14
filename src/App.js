@@ -56,13 +56,9 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-function getParam(param) {
+function getCode() {
   const urlParams = new URLSearchParams(window.location.search.slice(1));
-  console.log(window.location);
-  console.log(window.location.search);
-  console.log('ughhhh', urlParams);
-  console.log(param);
-  return urlParams.get(param);
+  return urlParams.get('code');
 }
 
 const App = () => {
@@ -75,17 +71,17 @@ const App = () => {
 
   useEffect(() => {
     // grab code/token step
-    const blah = getParam('access_token');
+    const blah = getCode();
     if (!blah) {
       window.location.href =
-        'https://visitors.auth.us-east-2.amazoncognito.com/login?client_id=2nk1shldaugv5agice7ham165j&response_type=code&scope=email+openid&redirect_uri=http://localhost:3000';
+        'https://visitors.auth.us-east-2.amazoncognito.com/login?client_id=2nk1shldaugv5agice7ham165j&response_type=token&scope=email+openid&redirect_uri=http://localhost:3000';
     }
 
-    setToken(blah);
+    setCode(blah);
   }, []);
 
-  console.log(token);
-  return token ? (
+  console.log(code);
+  return code ? (
     <div className={classes.app}>
       <div
         className={clsx(classes.background, {
