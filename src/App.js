@@ -10,7 +10,6 @@ import SignIn from './pages/SignIn';
 import SignOut from './pages/SignOut';
 
 import Adam from './components/Adam';
-import SidePanel from './components/SidePanel';
 
 import background from './assets/background.png';
 
@@ -108,7 +107,6 @@ const App = () => {
         </Route>
         <Route path="/signout">
           <div style={{ display: 'flex', marginLeft: '30vw', width: '70vw' }}>
-            <SidePanel />
             <SignOut />
           </div>
         </Route>

@@ -64,7 +64,17 @@ const SignIn = ({ token }) => {
   if (!loading) {
     content = (
       <Paper className={classes.paper} elevation={0}>
-        <MultiStepForm initialValues={{}} onSubmit={handleSubmit}>
+        <MultiStepForm
+          initialValues={{}}
+          onSubmit={handleSubmit}
+          sidePanelHeader="Sign In"
+          stepLabels={[
+            'Visitor Information',
+            'Picture Time',
+            'Capture',
+            'Visitor Pass',
+          ]}
+        >
           <MultiStepFormStep>
             <Field component={VisitorInformation} token={token} />
           </MultiStepFormStep>
