@@ -58,7 +58,7 @@ const SignIn = ({ token }) => {
       if (response.successful) {
         history.push({
           pathname: `${path}/success`,
-          state: { chaperone: values.Chaperone },
+          state: { chaperones: values.chaperones },
         });
       }
     }

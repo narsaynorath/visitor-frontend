@@ -19,7 +19,7 @@ const useStyles = makeStyles(theme => ({
     minHeight: '100vh',
   },
   paper: {
-    width: 'fit-content',
+    width: '85%',
   },
   greeting: {
     color: theme.palette.text.header,
@@ -43,7 +43,7 @@ const Success = ({ steps }) => {
   const location = useLocation();
   const history = useHistory();
 
-  const names = location.state.chaperone.map(c => c.name).join(', ');
+  const names = location.state.chaperones.map(c => c.real_name).join(', ');
 
   return (
     <div className={classes.container}>
