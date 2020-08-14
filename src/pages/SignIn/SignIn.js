@@ -47,7 +47,10 @@ const SignIn = ({ token }) => {
   const handleSubmit = values => {
     console.log(values);
     async function _handleSubmit() {
-      const response = await signInService.checkInVisitor(values, token);
+      const response = await signInService.checkInVisitor(
+        values,
+        token.access_token
+      );
       if (response.successful) {
         history.push('/');
       }

@@ -19,6 +19,21 @@ class TokenService extends APIService {
 
     return this.post('/oauth2/token', params, options, 'auth');
   }
+
+  refreshToken(token) {
+    const params = new URLSearchParams();
+    params.append('grant_type', 'refresh_token');
+    params.append('client_id', '2nk1shldaugv5agice7ham165j');
+    params.append('refresh_token', token);
+
+    const options = {
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+    };
+
+    return this.post('/oauth2/token', params, options, 'auth');
+  }
 }
 
 export default new TokenService();

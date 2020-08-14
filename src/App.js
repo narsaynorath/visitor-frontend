@@ -79,15 +79,14 @@ const App = () => {
   useEffect(() => {
     // grab code/token step
     const code = getCode();
-    if (!code) {
+    if (!code && !token) {
       window.location.href = redirectURL;
     }
 
     async function asyncUseEffect() {
       const response = await awsService.getTokens(code);
-      console.log(response);
       if (response.successful) {
-        setToken(response.data.access_token);
+        setToken(response.data);
       } else {
         window.location.href = redirectURL;
       }

@@ -46,7 +46,7 @@ const VisitorInformation = ({ form: { values }, token }) => {
 
   useEffect(() => {
     async function _useEffect() {
-      const chaperones = await signInService.getChaperones(token);
+      const chaperones = await signInService.getChaperones(token.access_token);
       if (chaperones.successful) {
         setChaperones(chaperones.data);
       }
