@@ -15,7 +15,6 @@ import {
 } from '../../components/MultiStepForm';
 import VisitorInformation from './VisitorInformation';
 
-import getAPIToken from '../../services/awsAuthService';
 import signInService from '../../services/signInService';
 
 const useStyles = makeStyles({

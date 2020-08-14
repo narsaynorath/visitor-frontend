@@ -1,13 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import clsx from 'clsx';
 
-import {
-  Switch,
-  Redirect,
-  Route,
-  useHistory,
-  useLocation,
-} from 'react-router-dom';
+import { Switch, Redirect, Route, useLocation } from 'react-router-dom';
 
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -72,7 +66,6 @@ const redirectURL = `https://visitors.auth.us-east-2.amazoncognito.com/login?cli
 const App = () => {
   const classes = useStyles();
   const location = useLocation();
-  const history = useHistory();
 
   const [token, setToken] = useState('');
 
@@ -92,6 +85,7 @@ const App = () => {
       }
     }
     asyncUseEffect();
+    // eslint-disable-next-line
   }, []);
 
   return token ? (

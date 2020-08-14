@@ -8,7 +8,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import MuiTextField from '@material-ui/core/TextField';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
-import getAPIToken from '../../services/awsAuthService';
 import signInService from '../../services/signInService';
 
 const useStyles = makeStyles(theme => ({
@@ -52,6 +51,7 @@ const VisitorInformation = ({ form: { values }, token }) => {
       }
     }
     _useEffect();
+    // eslint-disable-next-line
   }, []);
 
   return (
