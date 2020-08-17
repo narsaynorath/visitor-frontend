@@ -35,13 +35,13 @@ const config = {
 
 const S3Client = new S3(config);
 
-export default async dataUri => {
+export default async (dataUri, filename) => {
   var pngFile64 = dataUri.replace(/^data:image\/(png|png);base64,/, '');
   var file = base64ToBlob(pngFile64, 'image/png');
 
-  const res = await S3Client.uploadFile(file, 'visitor');
+  const res = await S3Client.uploadFile(file, filename);
 
-  return res.ok
+  return res.status === 204
     ? res.location
     : 'https://securitycompass-visitor-images.s3.us-east-2.amazonaws.com/Black_colour.jpg';
 };

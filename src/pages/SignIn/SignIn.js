@@ -46,7 +46,11 @@ const SignIn = ({ token }) => {
 
   const handleSubmit = values => {
     async function _handleSubmit() {
-      const s3ImageLocation = await uploadPic(values.picture);
+      const date = new Date();
+      const s3ImageLocation = await uploadPic(
+        values.picture,
+        date.toISOString()
+      );
       const response = await signInService.checkInVisitor(
         { ...values, image_url: s3ImageLocation },
         token.access_token
