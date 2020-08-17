@@ -47,4 +47,10 @@ export default class APIService {
       .post(this.buildURL(url, base), body, options)
       .then(successfulAPIRequest, unsuccessfulAPIRequest);
   }
+
+  patch(url, body, options) {
+    return axios
+      .patch(this.buildURL(url), body, options)
+      .then(successfulAPIRequest, unsuccessfulAPIRequest);
+  }
 }
