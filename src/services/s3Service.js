@@ -1,7 +1,4 @@
-import axios from 'axios';
-
-// An access token (from your Slack app or custom integration - xoxp, xoxb)
-const token = process.env.REACT_APP_SLACK_API_TOKEN;
+import S3 from 'aws-s3';
 
 function base64ToBlob(base64, mime) {
   mime = mime || '';
@@ -28,23 +25,21 @@ function base64ToBlob(base64, mime) {
 
   return new Blob(byteArrays, { type: mime });
 }
+
+const config = {
+  bucketName: 'securitycompass-visitor-images',
+  region: 'us-east-2',
+  accessKeyId: process.env.REACT_APP_S3_ACCESS,
+  secretAccessKey: process.env.REACT_APP_S3_SECRET,
+};
+
+const S3Client = new S3(config);
+
 export default async dataUri => {
   var pngFile64 = dataUri.replace(/^data:image\/(png|png);base64,/, '');
-  var pngBlob = base64ToBlob(pngFile64, 'image/png');
+  var file = base64ToBlob(pngFile64, 'image/png');
 
-  const formData = new FormData();
-  formData.set('token', token);
-  formData.set('filetype', 'png');
-  formData.append('file', pngBlob, 'visitor.png');
+  const res = await S3Client.uploadFile(file, 'visitor');
 
-  const res = await axios({
-    method: 'post',
-    url: 'https://slack.com/api/files.upload',
-    data: formData,
-    headers: { 'Content-Type': 'multipart/form-data' },
-  });
-
-  return {
-    url_private: res.data.file && res.data.file.url_private,
-  };
+  return res.location;
 };
