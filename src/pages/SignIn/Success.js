@@ -29,6 +29,7 @@ const useStyles = makeStyles(theme => ({
   avatar: {
     borderRadius: '50%',
     height: '10vh',
+    margin: '8px',
   },
   subtitle: {
     color: theme.palette.text.subtitle,
@@ -47,7 +48,7 @@ const Success = ({ steps }) => {
   const history = useHistory();
 
   const names = location.state.chaperones.map(c => c.real_name).join(', ');
-  const avatars = location.state.chaperones.map(c => c.avatar);
+  const avatars = location.state.chaperones.map(c => c.avatar_192);
 
   return (
     <div className={classes.container}>

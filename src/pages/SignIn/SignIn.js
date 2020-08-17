@@ -39,6 +39,7 @@ const useStyles = makeStyles({
 const SignIn = ({ token }) => {
   const classes = useStyles();
   const history = useHistory();
+  const [loading, setLoading] = useState(false);
   const { path } = useRouteMatch();
 
   const steps = ['Visitor Information', 'Picture Time', 'Capture'];
@@ -58,8 +59,8 @@ const SignIn = ({ token }) => {
       }
     }
     _handleSubmit();
+    setLoading(true);
   };
-
   let content = (
     <Loader type="TailSpin" color="#00BFFF" height={80} width={80} />
   );

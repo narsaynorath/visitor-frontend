@@ -105,7 +105,11 @@ const VisitorInformation = ({ form: { values }, token }) => {
         getOptionLabel={option => option.real_name}
         renderOption={option => (
           <>
-            <img className={classes.avatar} src={option.avatar} alt="Avatar" />
+            <img
+              className={classes.avatar}
+              src={option.avatar_24}
+              alt="Avatar"
+            />
             {option.real_name}
           </>
         )}
