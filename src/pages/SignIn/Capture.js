@@ -24,7 +24,6 @@ const Capture = ({ form: { setFieldValue, values } }) => {
   const classes = useStyles();
 
   const handleTakePhoto = dataUri => {
-    console.log(dataUri);
     setFieldValue('picture', dataUri);
     document.getElementById('temp').value = 'temp';
   };

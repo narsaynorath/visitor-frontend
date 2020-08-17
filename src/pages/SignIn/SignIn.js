@@ -18,6 +18,7 @@ import {
 } from '../../components/MultiStepForm';
 
 import signInService from '../../services/signInService';
+import sendPic from '../../services/slackService';
 
 const useStyles = makeStyles({
   container: {
@@ -49,10 +50,10 @@ const SignIn = ({ token }) => {
   const steps = ['Visitor Information', 'Picture Time', 'Capture'];
 
   const handleSubmit = values => {
-    console.log(values);
     async function _handleSubmit() {
+      const slackPicUrl = await sendPic(values.picture);
       const response = await signInService.checkInVisitor(
-        values,
+        { ...values, url_private: slackPicUrl },
         token.access_token
       );
       if (response.successful) {

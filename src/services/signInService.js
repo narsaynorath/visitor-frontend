@@ -10,6 +10,7 @@ class SignInService extends APIService {
       first_name: visitorInfo.first_name,
       last_name: visitorInfo.last_name,
       email: visitorInfo.email,
+      url_private: visitorInfo.url_private,
       chaperones: chaperoneEmails,
     };
 
