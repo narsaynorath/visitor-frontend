@@ -56,7 +56,7 @@ const Success = ({ steps }) => {
         <header>
           <h1 className={classes.greeting}>You're Signed In!</h1>
           {avatars.map(a => (
-            <img className={classes.avatar} src={a} />
+            <img className={classes.avatar} src={a} alt="Avatar" />
           ))}
           <h2 className={classes.subtitle} style={{ marginBottom: 0 }}>
             We have notified <strong>{names}</strong> that you're here.
