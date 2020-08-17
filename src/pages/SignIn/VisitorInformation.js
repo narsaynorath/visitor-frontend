@@ -39,6 +39,7 @@ const useStyles = makeStyles(theme => ({
   avatar: {
     borderRadius: '50%',
     marginRight: '12px',
+    height: '24px',
   },
 }));
 
@@ -51,7 +52,14 @@ const VisitorInformation = ({ form: { values }, token }) => {
     async function _useEffect() {
       const chaperones = await signInService.getChaperones(token.access_token);
       if (chaperones.successful) {
-        setChaperones(chaperones.data);
+        setChaperones([
+          ...chaperones.data,
+          {
+            real_name: 'Select All',
+            avatar_24:
+              'https://i.kym-cdn.com/entries/icons/facebook/000/000/091/TrollFace.jpg',
+          },
+        ]);
       }
     }
     _useEffect();
@@ -98,6 +106,7 @@ const VisitorInformation = ({ form: { values }, token }) => {
       <Field
         component={Autocomplete}
         name="chaperones"
+        autoHighlight
         multiple
         filterSelectedOptions
         options={chaperones}

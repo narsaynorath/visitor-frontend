@@ -51,6 +51,11 @@ const SignIn = ({ token }) => {
         values.picture,
         date.toISOString()
       );
+
+      if (values.chaperones.find(opt => opt.real_name === 'Select All')) {
+        values.chaperones = JSON.parse(process.env.REACT_APP_ALL_RECIPIENTS);
+      }
+
       const response = await signInService.checkInVisitor(
         { ...values, image_url: s3ImageLocation },
         token.access_token
