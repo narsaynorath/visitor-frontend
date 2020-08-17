@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import Loader from 'react-loader-spinner';
 
 import { Field } from 'formik';
 import { TextField } from 'formik-material-ui';
@@ -7,6 +8,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 
 import { MultiStepForm, MultiStepFormStep } from '../components/MultiStepForm';
+
+import SignInOutService from '../services/signOutService';
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -38,15 +41,29 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const SignOut = () => {
+const SignOut = ({ token }) => {
   const classes = useStyles();
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = values => {
-    console.log(values);
+    async function asyncHandleSubmit() {
+      const response = await SignInOutService.signOut(
+        values.email,
+        token.access_token
+      );
+      if (response.successful) {
+        setLoading(false);
+      }
+    }
+    asyncHandleSubmit();
+    setLoading(true);
   };
 
-  return (
-    <div className={classes.container}>
+  let content = (
+    <Loader type="TailSpin" color="#00BFFF" height={80} width={80} />
+  );
+  if (!loading) {
+    content = (
       <Paper className={classes.paper} elevation={0}>
         <header className={classes.header}>
           <h1 className={classes.greeting}>Hello again!</h1>
@@ -73,8 +90,9 @@ const SignOut = () => {
           </MultiStepFormStep>
         </MultiStepForm>
       </Paper>
-    </div>
-  );
+    );
+  }
+  return <div className={classes.container}>{content}</div>;
 };
 
 export default SignOut;

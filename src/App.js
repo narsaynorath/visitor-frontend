@@ -107,7 +107,7 @@ const App = () => {
         </Route>
         <Route path="/signout">
           <div style={{ display: 'flex', marginLeft: '30vw', width: '70vw' }}>
-            <SignOut />
+            <SignOut token={token} />
           </div>
         </Route>
         <Redirect to="/" />
