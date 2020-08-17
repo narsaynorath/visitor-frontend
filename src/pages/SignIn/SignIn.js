@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Loader from 'react-loader-spinner';
 import { Switch, Route, useHistory, useRouteMatch } from 'react-router-dom';
 
@@ -18,7 +18,7 @@ import {
 } from '../../components/MultiStepForm';
 
 import signInService from '../../services/signInService';
-import sendPic from '../../services/slackService';
+import uploadPic from '../../services/slackService';
 
 const useStyles = makeStyles({
   container: {
@@ -39,21 +39,15 @@ const useStyles = makeStyles({
 const SignIn = ({ token }) => {
   const classes = useStyles();
   const history = useHistory();
-  const [loading, setLoading] = useState(true);
   const { path } = useRouteMatch();
-
-  useEffect(() => {
-    // Mock API request to get list data
-    setTimeout(() => setLoading(false), 500);
-  }, []);
 
   const steps = ['Visitor Information', 'Picture Time', 'Capture'];
 
   const handleSubmit = values => {
     async function _handleSubmit() {
-      const slackPicUrl = await sendPic(values.picture);
+      const slackPicRes = await uploadPic(values.picture);
       const response = await signInService.checkInVisitor(
-        { ...values, url_private: slackPicUrl },
+        { ...values, url_private: slackPicRes.url_private },
         token.access_token
       );
       if (response.successful) {
@@ -64,7 +58,6 @@ const SignIn = ({ token }) => {
       }
     }
     _handleSubmit();
-    setLoading(true);
   };
 
   let content = (

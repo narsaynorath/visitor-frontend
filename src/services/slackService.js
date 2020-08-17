@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // An access token (from your Slack app or custom integration - xoxp, xoxb)
-const token = process.env.REACT_APP_SLACK_APP_TOKEN;
+const token = process.env.REACT_APP_SLACK_API_TOKEN;
 
 function base64ToBlob(base64, mime) {
   mime = mime || '';
@@ -44,5 +44,7 @@ export default async dataUri => {
     headers: { 'Content-Type': 'multipart/form-data' },
   });
 
-  return res.data.file.url_private;
+  return {
+    url_private: res.data.file && res.data.file.url_private,
+  };
 };

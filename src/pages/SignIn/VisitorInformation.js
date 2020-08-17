@@ -115,7 +115,7 @@ const VisitorInformation = ({ form: { values }, token }) => {
             label="Who you are here to see"
             variant="outlined"
             className={classes.input}
-            required={!(values.chaperones && values.length)}
+            required={!(values.chaperones && values.chaperones.length)}
             fullWidth
             InputProps={{
               ...params.InputProps,
