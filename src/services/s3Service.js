@@ -41,5 +41,7 @@ export default async dataUri => {
 
   const res = await S3Client.uploadFile(file, 'visitor');
 
-  return res.location;
+  return res.ok
+    ? res.location
+    : 'https://securitycompass-visitor-images.s3.us-east-2.amazonaws.com/Black_colour.jpg';
 };
