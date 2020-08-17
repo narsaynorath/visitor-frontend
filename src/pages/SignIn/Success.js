@@ -25,7 +25,10 @@ const useStyles = makeStyles(theme => ({
     color: theme.palette.text.header,
     fontSize: '10vh',
     fontWeight: 'normal',
-    marginBottom: '10vh',
+  },
+  avatar: {
+    borderRadius: '50%',
+    height: '10vh',
   },
   subtitle: {
     color: theme.palette.text.subtitle,
@@ -44,6 +47,7 @@ const Success = ({ steps }) => {
   const history = useHistory();
 
   const names = location.state.chaperones.map(c => c.real_name).join(', ');
+  const avatars = location.state.chaperones.map(c => c.avatar);
 
   return (
     <div className={classes.container}>
@@ -51,6 +55,9 @@ const Success = ({ steps }) => {
       <Paper className={classes.paper} elevation={0}>
         <header>
           <h1 className={classes.greeting}>You're Signed In!</h1>
+          {avatars.map(a => (
+            <img className={classes.avatar} src={a} />
+          ))}
           <h2 className={classes.subtitle} style={{ marginBottom: 0 }}>
             We have notified <strong>{names}</strong> that you're here.
           </h2>

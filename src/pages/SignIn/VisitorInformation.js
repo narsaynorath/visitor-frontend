@@ -36,6 +36,10 @@ const useStyles = makeStyles(theme => ({
     fontSize: '3vh',
     fontWeight: 'normal',
   },
+  avatar: {
+    borderRadius: '50%',
+    marginRight: '12px',
+  },
 }));
 
 const VisitorInformation = ({ form: { values }, token }) => {
@@ -99,13 +103,19 @@ const VisitorInformation = ({ form: { values }, token }) => {
         options={chaperones}
         loading={loading}
         getOptionLabel={option => option.real_name}
+        renderOption={option => (
+          <>
+            <img className={classes.avatar} src={option.avatar} />
+            {option.real_name}
+          </>
+        )}
         renderInput={params => (
           <MuiTextField
             {...params}
             label="Who you are here to see"
             variant="outlined"
             className={classes.input}
-            required={!values.chaperones}
+            required={!(values.chaperones && values.length)}
             fullWidth
             InputProps={{
               ...params.InputProps,
